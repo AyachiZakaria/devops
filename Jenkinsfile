@@ -33,6 +33,11 @@ pipeline {
                 sh 'mvn test'
              }
         }
+        stage('Nexus') {
+            steps {
+                sh './mvnw clean deploy -DskipTests'
+            }
+        }
     }
     post {
             always {
