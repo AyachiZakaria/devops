@@ -1,0 +1,321 @@
+[ 6387.367446] INFO: rcu_sched self-detected stall on CPU
+[ 6387.368725] INFO: rcu_sched detected stalls on CPUs/tasks:
+[ 6387.377393] 	1-...!: (3 ticks this GP) idle=15e/140000000000001/0 softirq=924/925 fqs=2 
+[ 6387.395027] 	 (t=495456 jiffies g=-132 c=-133 q=46)
+[ 6387.395043] 	1-...!: (3 ticks this GP) idle=15e/140000000000001/0 softirq=924/925 fqs=2 
+[ 6387.395044] 	(detected by 0, t=495456 jiffies, g=-132, c=-133, q=46)
+[ 6387.400629] rcu_sched kthread starved for 495452 jiffies! g18446744073709551484 c18446744073709551483 f0x0 RCU_GP_WAIT_FQS(3) ->state=0x402 ->cpu=0
+[ 6387.410398] Sending NMI from CPU 0 to CPUs 1:
+[ 6387.421250] rcu_sched       I    0     8      2 0x80000000
+[ 6387.442230] NMI backtrace for cpu 1
+[ 6387.442256] CPU: 1 PID: 284 Comm: modprobe Not tainted 4.15.0-212-generic #223-Ubuntu
+[ 6387.442256] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 6387.442257] RIP: 0010:io_serial_out+0x1a/0x20
+[ 6387.442257] RSP: 0018:ffff8e107fd03c00 EFLAGS: 00010002
+[ 6387.442258] RAX: 0000000000000036 RBX: ffffffff8d916e60 RCX: 0000000000000000
+[ 6387.442259] RDX: 00000000000003f8 RSI: 0000000000000000 RDI: ffffffff8d916e60
+[ 6387.442259] RBP: ffff8e107fd03c00 R08: 0000000000000000 R09: 0000000000000007
+[ 6387.442260] R10: 0000000000000000 R11: ffffffff8d76a80d R12: 0000000000000036
+[ 6387.442260] R13: ffffffff8d76a831 R14: ffffffff8d76a803 R15: ffffffff8d916e60
+[ 6387.442261] FS:  00007f289bf97540(0000) GS:ffff8e107fd00000(0000) knlGS:0000000000000000
+[ 6387.442261] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 6387.442262] CR2: 000055a51e754808 CR3: 00000000368e6004 CR4: 00000000000206e0
+[ 6387.442262] Call Trace:
+[ 6387.442262]  <IRQ>
+[ 6387.442263]  serial8250_console_putchar+0x2d/0x40
+[ 6387.442263]  ? wait_for_xmitr+0xb0/0xb0
+[ 6387.442263]  uart_console_write+0x4c/0x60
+[ 6387.442264]  serial8250_console_write+0x10a/0x2a0
+[ 6387.442264]  ? msg_print_text+0x80/0x100
+[ 6387.442264]  univ8250_console_write+0x21/0x30
+[ 6387.442265]  console_unlock+0x3cf/0x560
+[ 6387.442265]  vprintk_emit+0x134/0x2c0
+[ 6387.442265]  vprintk_default+0x29/0x50
+[ 6387.442266]  vprintk_func+0x47/0xc0
+[ 6387.442266]  printk+0x52/0x6e
+[ 6387.442266]  sched_show_task+0xe5/0x130
+[ 6387.442267]  rcu_check_gp_kthread_starvation+0xad/0xc0
+[ 6387.442267]  rcu_check_callbacks+0x6c5/0x8e0
+[ 6387.442267]  ? tick_sched_do_timer+0x50/0x50
+[ 6387.442268]  update_process_times+0x2f/0x60
+[ 6387.442268]  tick_sched_handle+0x26/0x70
+[ 6387.442268]  ? tick_sched_do_timer+0x42/0x50
+[ 6387.442269]  tick_sched_timer+0x39/0x80
+[ 6387.442269]  __hrtimer_run_queues+0xdf/0x230
+[ 6387.442269]  hrtimer_interrupt+0x97/0x180
+[ 6387.442270]  smp_apic_timer_interrupt+0x6f/0x140
+[ 6387.442270]  apic_timer_interrupt+0x90/0xa0
+[ 6387.442270]  </IRQ>
+[ 6387.442271] RIP: 0010:do_xor_speed+0x4f/0xc9 [xor]
+[ 6387.442271] RSP: 0018:ffffb7e440377c08 EFLAGS: 00010246 ORIG_RAX: ffffffffffffff11
+[ 6387.442272] RAX: 0000000000000000 RBX: 000000000000bf9d RCX: ffff8e1076592b80
+[ 6387.442272] RDX: 00000000fffee25e RSI: ffff8e10769a1000 RDI: ffff8e1076593f40
+[ 6387.442273] RBP: ffffb7e440377c40 R08: ffffffffc0137680 R09: 0000000000000000
+[ 6387.442273] R10: 0000000000000001 R11: ffffffff8c33a270 R12: ffffffffc013a080
+[ 6387.442274] R13: 000000000000bf9d R14: 0000000000000004 R15: 00000000fffee25e
+[ 6387.442274]  ? vga_set_palette+0x180/0x180
+[ 6387.442299]  ? xor_sse_3_pf64+0x260/0x260 [xor]
+[ 6387.442300]  ? do_xor_speed+0x7d/0xc9 [xor]
+[ 6387.442300]  calibrate_xor_blocks+0xc3/0xf37 [xor]
+[ 6387.442301]  ? do_xor_speed+0xc9/0xc9 [xor]
+[ 6387.442301]  do_one_initcall+0x52/0x1b0
+[ 6387.442301]  ? _cond_resched+0x19/0x40
+[ 6387.442302]  ? kmem_cache_alloc_trace+0x167/0x1d0
+[ 6387.442302]  ? do_init_module+0x27/0x1f2
+[ 6387.442302]  do_init_module+0x4f/0x1f2
+[ 6387.442303]  load_module+0x1aa7/0x1fd0
+[ 6387.442303]  ? ima_post_read_file+0x96/0xa0
+[ 6387.442303]  SYSC_finit_module+0xfc/0x120
+[ 6387.442304]  ? SYSC_finit_module+0xfc/0x120
+[ 6387.442304]  SyS_finit_module+0xe/0x10
+[ 6387.442304]  do_syscall_64+0x73/0x130
+[ 6387.442305]  entry_SYSCALL_64_after_hwframe+0x59/0xbe
+[ 6387.442305] RIP: 0033:0x7f289ba9a539
+[ 6387.442305] RSP: 002b:00007ffd94493178 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 6387.442306] RAX: ffffffffffffffda RBX: 000055682dd3d700 RCX: 00007f289ba9a539
+[ 6387.442307] RDX: 0000000000000000 RSI: 000055682da04cee RDI: 0000000000000005
+[ 6387.442307] RBP: 000055682da04cee R08: 0000000000000000 R09: 000055682dd3ce00
+[ 6387.442308] R10: 0000000000000005 R11: 0000000000000246 R12: 0000000000000000
+[ 6387.442308] R13: 000055682dd44630 R14: 0000000000060000 R15: 000055682dd3ce00
+[ 6387.442309] Code: 55 48 89 e5 d3 e6 01 f2 ec 0f b6 c0 5d c3 0f 1f 00 0f 1f 44 00 00 0f b6 8f a1 00 00 00 89 d0 8b 57 08 55 48 89 e5 d3 e6 01 f2 ee <5d> c3 0f 1f 40 00 0f 1f 44 00 00 0f b6 87 a2 00 00 00 55 48 c7 
+[ 6387.442320] INFO: NMI handler (nmi_cpu_backtrace_handler) took too long to run: 2.064 msecs
+[ 6387.442323] rcu_sched kthread starved for 495452 jiffies! g18446744073709551484 c18446744073709551483 f0x0 RCU_GP_WAIT_FQS(3) ->state=0x402 ->cpu=0
+[ 6387.446155] Call Trace:
+[ 6387.452685] rcu_sched       I    0     8      2 0x80000000
+[ 6387.452688] Call Trace:
+[ 6387.452778]  __schedule+0x24e/0x890
+[ 6387.458591]  __schedule+0x24e/0x890
+[ 6387.469089]  schedule+0x2c/0x80
+[ 6387.469093]  schedule_timeout+0x15d/0x370
+[ 6387.469097]  ? __next_timer_interrupt+0xe0/0xe0
+[ 6387.469101]  rcu_gp_kthread+0x53a/0x980
+[ 6387.469177]  kthread+0x121/0x140
+[ 6387.469183]  ? rcu_note_context_switch+0x150/0x150
+[ 6387.469185]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 6387.469188]  ret_from_fork+0x35/0x40
+[ 6388.124488]  ? default_send_IPI_single+0x3c/0x40
+[ 6388.129492]  schedule+0x2c/0x80
+[ 6388.132884]  schedule_timeout+0x15d/0x370
+[ 6388.139770]  ? __next_timer_interrupt+0xe0/0xe0
+[ 6388.144518]  rcu_gp_kthread+0x53a/0x980
+[ 6388.148535]  kthread+0x121/0x140
+[ 6388.154258]  ? rcu_note_context_switch+0x150/0x150
+[ 6388.159412]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 6388.164555]  ret_from_fork+0x35/0x40
+[ 6388.170428] NMI backtrace for cpu 1
+[ 6388.174784] CPU: 1 PID: 284 Comm: modprobe Not tainted 4.15.0-212-generic #223-Ubuntu
+[ 6388.182517] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 6388.192344] Call Trace:
+[ 6388.195362]  <IRQ>
+[ 6388.197916]  dump_stack+0x6d/0x8b
+[ 6388.201854]  nmi_cpu_backtrace+0x94/0xa0
+[ 6388.209684]  ? lapic_can_unplug_cpu+0xb0/0xb0
+[ 6388.215245]  nmi_trigger_cpumask_backtrace+0xe7/0x130
+[ 6388.223061]  arch_trigger_cpumask_backtrace+0x19/0x20
+[ 6388.229163]  rcu_dump_cpu_stacks+0xa3/0xd5
+[ 6388.234682]  rcu_check_callbacks+0x6cd/0x8e0
+[ 6388.242408]  ? tick_sched_do_timer+0x50/0x50
+[ 6388.247688]  update_process_times+0x2f/0x60
+[ 6388.252699]  tick_sched_handle+0x26/0x70
+[ 6388.259566]  ? tick_sched_do_timer+0x42/0x50
+[ 6388.264673]  tick_sched_timer+0x39/0x80
+[ 6388.271211]  __hrtimer_run_queues+0xdf/0x230
+[ 6388.277100]  hrtimer_interrupt+0x97/0x180
+[ 6388.281487]  smp_apic_timer_interrupt+0x6f/0x140
+[ 6388.288792]  apic_timer_interrupt+0x90/0xa0
+[ 6388.293766]  </IRQ>
+[ 6388.297128] RIP: 0010:do_xor_speed+0x4f/0xc9 [xor]
+[ 6388.302064] RSP: 0018:ffffb7e440377c08 EFLAGS: 00010246 ORIG_RAX: ffffffffffffff11
+[ 6388.311694] RAX: 0000000000000000 RBX: 000000000000bf9d RCX: ffff8e1076592b80
+[ 6388.322431] RDX: 00000000fffee25e RSI: ffff8e10769a1000 RDI: ffff8e1076593f40
+[ 6388.330398] RBP: ffffb7e440377c40 R08: ffffffffc0137680 R09: 0000000000000000
+[ 6388.339049] R10: 0000000000000001 R11: ffffffff8c33a270 R12: ffffffffc013a080
+[ 6388.346243] R13: 000000000000bf9d R14: 0000000000000004 R15: 00000000fffee25e
+[ 6388.355602]  ? vga_set_palette+0x180/0x180
+[ 6388.361924]  ? xor_sse_3_pf64+0x260/0x260 [xor]
+[ 6388.367353]  ? do_xor_speed+0x7d/0xc9 [xor]
+[ 6388.374046]  calibrate_xor_blocks+0xc3/0xf37 [xor]
+[ 6388.379252]  ? do_xor_speed+0xc9/0xc9 [xor]
+[ 6388.383210]  do_one_initcall+0x52/0x1b0
+[ 6388.388467]  ? _cond_resched+0x19/0x40
+[ 6388.392006]  ? kmem_cache_alloc_trace+0x167/0x1d0
+[ 6388.396527]  ? do_init_module+0x27/0x1f2
+[ 6388.400502]  do_init_module+0x4f/0x1f2
+[ 6388.405884]  load_module+0x1aa7/0x1fd0
+[ 6388.410208]  ? ima_post_read_file+0x96/0xa0
+[ 6388.414423]  SYSC_finit_module+0xfc/0x120
+[ 6388.418429]  ? SYSC_finit_module+0xfc/0x120
+[ 6388.424546]  SyS_finit_module+0xe/0x10
+[ 6388.428656]  do_syscall_64+0x73/0x130
+[ 6388.432106]  entry_SYSCALL_64_after_hwframe+0x59/0xbe
+[ 6388.438912] RIP: 0033:0x7f289ba9a539
+[ 6388.443776] RSP: 002b:00007ffd94493178 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 6388.450945] RAX: ffffffffffffffda RBX: 000055682dd3d700 RCX: 00007f289ba9a539
+[ 6388.459644] RDX: 0000000000000000 RSI: 000055682da04cee RDI: 0000000000000005
+[ 6388.467046] RBP: 000055682da04cee R08: 0000000000000000 R09: 000055682dd3ce00
+[ 6388.477918] R10: 0000000000000005 R11: 0000000000000246 R12: 0000000000000000
+[ 6388.488265] R13: 000055682dd44630 R14: 0000000000060000 R15: 000055682dd3ce00
+[ 6388.496367] INFO: rcu_sched self-detected stall on CPU
+[ 6388.500213] INFO: rcu_sched detected stalls on CPUs/tasks:
+[ 6388.504625] 	1-...0: (4 ticks this GP) idle=15e/140000000000001/0 softirq=924/925 fqs=3 
+[ 6388.522347] 	 (t=1595251 jiffies g=-132 c=-133 q=56)
+[ 6388.522395] 	1-...0: (4 ticks this GP) idle=15e/140000000000001/0 softirq=924/925 fqs=3 
+[ 6388.527852] rcu_sched kthread starved for 1099795 jiffies! g18446744073709551484 c18446744073709551483 f0x0 RCU_GP_WAIT_FQS(3) ->state=0x402 ->cpu=0
+[ 6388.527854] rcu_sched       I    0     8      2 0x80000000
+[ 6388.536443] 	(detected by 0, t=1595251 jiffies, g=-132, c=-133, q=56)
+[ 6388.549733] Call Trace:
+[ 6388.558419] Sending NMI from CPU 0 to CPUs 1:
+[ 6388.565468]  __schedule+0x24e/0x890
+[ 6388.572617] NMI backtrace for cpu 1
+[ 6388.572619] CPU: 1 PID: 284 Comm: modprobe Not tainted 4.15.0-212-generic #223-Ubuntu
+[ 6388.572619] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 6388.572620] RIP: 0010:io_serial_out+0x1a/0x20
+[ 6388.572621] RSP: 0018:ffff8e107fd03b00 EFLAGS: 00010002
+[ 6388.572621] RAX: 0000000000000020 RBX: ffffffff8d916e60 RCX: 0000000000000000
+[ 6388.572622] RDX: 00000000000003f8 RSI: 0000000000000000 RDI: ffffffff8d916e60
+[ 6388.572623] RBP: ffff8e107fd03b00 R08: 0000000000000000 R09: 0000000000000007
+[ 6388.572623] R10: 0000000000000000 R11: ffffffff8d76a80d R12: 0000000000000020
+[ 6388.572624] R13: ffffffff8d76a831 R14: ffffffff8d76a802 R15: ffffffff8d916e60
+[ 6388.572624] FS:  00007f289bf97540(0000) GS:ffff8e107fd00000(0000) knlGS:0000000000000000
+[ 6388.572625] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[ 6388.572626] CR2: 000055a51e754808 CR3: 00000000368e6004 CR4: 00000000000206e0
+[ 6388.572626] Call Trace:
+[ 6388.572626]  <IRQ>
+[ 6388.572627]  serial8250_console_putchar+0x2d/0x40
+[ 6388.572627]  ? wait_for_xmitr+0xb0/0xb0
+[ 6388.572627]  uart_console_write+0x4c/0x60
+[ 6388.572628]  serial8250_console_write+0x10a/0x2a0
+[ 6388.572628]  ? msg_print_text+0x80/0x100
+[ 6388.572629]  univ8250_console_write+0x21/0x30
+[ 6388.572629]  console_unlock+0x3cf/0x560
+[ 6388.572630]  vprintk_emit+0x134/0x2c0
+[ 6388.572630]  ? __schedule+0x24e/0x890
+[ 6388.572630]  vprintk_default+0x29/0x50
+[ 6388.572631]  vprintk_func+0x47/0xc0
+[ 6388.572631]  printk+0x52/0x6e
+[ 6388.572668]  ? kernel_text_address+0xe8/0xf0
+[ 6388.572669]  ? __schedule+0x24e/0x890
+[ 6388.572670]  ? __schedule+0x24e/0x890
+[ 6388.572670]  show_trace_log_lvl+0x218/0x3d0
+[ 6388.572671]  ? __schedule+0x24e/0x890
+[ 6388.572671]  ? __schedule+0x24e/0x890
+[ 6388.572671]  show_stack+0x34/0x50
+[ 6388.572672]  sched_show_task+0xfe/0x130
+[ 6388.572672]  rcu_check_gp_kthread_starvation+0xad/0xc0
+[ 6388.572673]  rcu_check_callbacks+0x6c5/0x8e0
+[ 6388.572673]  ? tick_sched_do_timer+0x50/0x50
+[ 6388.572674]  update_process_times+0x2f/0x60
+[ 6388.572674]  tick_sched_handle+0x26/0x70
+[ 6388.572674]  ? tick_sched_do_timer+0x42/0x50
+[ 6388.572675]  tick_sched_timer+0x39/0x80
+[ 6388.572675]  __hrtimer_run_queues+0xdf/0x230
+[ 6388.572676]  hrtimer_interrupt+0x97/0x180
+[ 6388.572676]  smp_apic_timer_interrupt+0x6f/0x140
+[ 6388.572677]  apic_timer_interrupt+0x90/0xa0
+[ 6388.572677]  </IRQ>
+[ 6388.572677] RIP: 0010:do_xor_speed+0x4f/0xc9 [xor]
+[ 6388.572678] RSP: 0018:ffffb7e440377c08 EFLAGS: 00010246 ORIG_RAX: ffffffffffffff11
+[ 6388.572679] RAX: 0000000000000000 RBX: 000000000000bf9d RCX: ffff8e1076592b80
+[ 6388.572680] RDX: 00000000fffee25e RSI: ffff8e10769a1000 RDI: ffff8e1076593f40
+[ 6388.572680] RBP: ffffb7e440377c40 R08: ffffffffc0137680 R09: 0000000000000000
+[ 6388.572681] R10: 0000000000000001 R11: ffffffff8c33a270 R12: ffffffffc013a080
+[ 6388.572681] R13: 000000000000bf9d R14: 0000000000000004 R15: 00000000fffee25e
+[ 6388.572682]  ? vga_set_palette+0x180/0x180
+[ 6388.572682]  ? xor_sse_3_pf64+0x260/0x260 [xor]
+[ 6388.572682]  ? do_xor_speed+0x7d/0xc9 [xor]
+[ 6388.572683]  calibrate_xor_blocks+0xc3/0xf37 [xor]
+[ 6388.572683]  ? do_xor_speed+0xc9/0xc9 [xor]
+[ 6388.572684]  do_one_initcall+0x52/0x1b0
+[ 6388.572684]  ? _cond_resched+0x19/0x40
+[ 6388.572685]  ? kmem_cache_alloc_trace+0x167/0x1d0
+[ 6388.572685]  ? do_init_module+0x27/0x1f2
+[ 6388.572685]  do_init_module+0x4f/0x1f2
+[ 6388.572686]  load_module+0x1aa7/0x1fd0
+[ 6388.572686]  ? ima_post_read_file+0x96/0xa0
+[ 6388.572687]  SYSC_finit_module+0xfc/0x120
+[ 6388.572687]  ? SYSC_finit_module+0xfc/0x120
+[ 6388.572687]  SyS_finit_module+0xe/0x10
+[ 6388.572688]  do_syscall_64+0x73/0x130
+[ 6388.572688]  entry_SYSCALL_64_after_hwframe+0x59/0xbe
+[ 6388.572689] RIP: 0033:0x7f289ba9a539
+[ 6388.572689] RSP: 002b:00007ffd94493178 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 6388.572690] RAX: ffffffffffffffda RBX: 000055682dd3d700 RCX: 00007f289ba9a539
+[ 6388.572691] RDX: 0000000000000000 RSI: 000055682da04cee RDI: 0000000000000005
+[ 6388.572691] RBP: 000055682da04cee R08: 0000000000000000 R09: 000055682dd3ce00
+[ 6388.572692] R10: 0000000000000005 R11: 0000000000000246 R12: 0000000000000000
+[ 6388.572692] R13: 000055682dd44630 R14: 0000000000060000 R15: 000055682dd3ce00
+[ 6388.572693] Code: 55 48 89 e5 d3 e6 01 f2 ec 0f b6 c0 5d c3 0f 1f 00 0f 1f 44 00 00 0f b6 8f a1 00 00 00 89 d0 8b 57 08 55 48 89 e5 d3 e6 01 f2 ee <5d> c3 0f 1f 40 00 0f 1f 44 00 00 0f b6 87 a2 00 00 00 55 48 c7 
+[ 6388.572709] rcu_sched kthread starved for 1099795 jiffies! g18446744073709551484 c18446744073709551483 f0x0 RCU_GP_WAIT_FQS(3) ->state=0x402 ->cpu=0
+[ 6388.577275]  schedule+0x2c/0x80
+[ 6388.581745] rcu_sched       I    0     8      2 0x80000000
+[ 6388.589492]  schedule_timeout+0x15d/0x370
+[ 6388.597622] Call Trace:
+[ 6388.608775]  ? __next_timer_interrupt+0xe0/0xe0
+[ 6388.613665]  __schedule+0x24e/0x890
+[ 6388.621750]  rcu_gp_kthread+0x53a/0x980
+[ 6388.629306]  schedule+0x2c/0x80
+[ 6388.638967]  kthread+0x121/0x140
+[ 6388.646567]  schedule_timeout+0x15d/0x370
+[ 6388.655398]  ? rcu_note_context_switch+0x150/0x150
+[ 6388.664075]  ? __next_timer_interrupt+0xe0/0xe0
+[ 6388.675431]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 6388.681774]  rcu_gp_kthread+0x53a/0x980
+[ 6388.689931]  ret_from_fork+0x35/0x40
+[ 6388.693600]  kthread+0x121/0x140
+[ 6388.695943] NMI backtrace for cpu 1
+[ 6388.701659]  ? rcu_note_context_switch+0x150/0x150
+[ 6388.701668]  ? kthread_create_worker_on_cpu+0x70/0x70
+[ 6388.701750]  ret_from_fork+0x35/0x40
+[ 6389.196852] CPU: 1 PID: 284 Comm: modprobe Not tainted 4.15.0-212-generic #223-Ubuntu
+[ 6389.206797] Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[ 6389.215607] Call Trace:
+[ 6389.217987]  <IRQ>
+[ 6389.222111]  dump_stack+0x6d/0x8b
+[ 6389.225972]  nmi_cpu_backtrace+0x94/0xa0
+[ 6389.230050]  ? lapic_can_unplug_cpu+0xb0/0xb0
+[ 6389.234300]  nmi_trigger_cpumask_backtrace+0xe7/0x130
+[ 6389.240539]  arch_trigger_cpumask_backtrace+0x19/0x20
+[ 6389.245121]  rcu_dump_cpu_stacks+0xa3/0xd5
+[ 6389.248836]  rcu_check_callbacks+0x6cd/0x8e0
+[ 6389.253743]  ? tick_sched_do_timer+0x50/0x50
+[ 6389.258427]  update_process_times+0x2f/0x60
+[ 6389.262692]  tick_sched_handle+0x26/0x70
+[ 6389.266311]  ? tick_sched_do_timer+0x42/0x50
+[ 6389.273574]  tick_sched_timer+0x39/0x80
+[ 6389.277191]  __hrtimer_run_queues+0xdf/0x230
+[ 6389.281446]  hrtimer_interrupt+0x97/0x180
+[ 6389.285090]  smp_apic_timer_interrupt+0x6f/0x140
+[ 6389.293008]  apic_timer_interrupt+0x90/0xa0
+[ 6389.297123]  </IRQ>
+[ 6389.299897] RIP: 0010:do_xor_speed+0x4f/0xc9 [xor]
+[ 6389.306844] RSP: 0018:ffffb7e440377c08 EFLAGS: 00010246 ORIG_RAX: ffffffffffffff11
+[ 6389.314111] RAX: 0000000000000000 RBX: 000000000000bf9d RCX: ffff8e1076592b80
+[ 6389.323006] RDX: 00000000fffee25e RSI: ffff8e10769a1000 RDI: ffff8e1076593f40
+[ 6389.330942] RBP: ffffb7e440377c40 R08: ffffffffc0137680 R09: 0000000000000000
+[ 6389.340586] R10: 0000000000000001 R11: ffffffff8c33a270 R12: ffffffffc013a080
+[ 6389.348214] R13: 000000000000bf9d R14: 0000000000000004 R15: 00000000fffee25e
+[ 6389.356691]  ? vga_set_palette+0x180/0x180
+[ 6389.360490]  ? xor_sse_3_pf64+0x260/0x260 [xor]
+[ 6389.365052]  ? do_xor_speed+0x7d/0xc9 [xor]
+[ 6389.369000]  calibrate_xor_blocks+0xc3/0xf37 [xor]
+[ 6389.375448]  ? do_xor_speed+0xc9/0xc9 [xor]
+[ 6389.379682]  do_one_initcall+0x52/0x1b0
+[ 6389.383251]  ? _cond_resched+0x19/0x40
+[ 6389.389054]  ? kmem_cache_alloc_trace+0x167/0x1d0
+[ 6389.393437]  ? do_init_module+0x27/0x1f2
+[ 6389.397258]  do_init_module+0x4f/0x1f2
+[ 6389.400736]  load_module+0x1aa7/0x1fd0
+[ 6389.406660]  ? ima_post_read_file+0x96/0xa0
+[ 6389.410960]  SYSC_finit_module+0xfc/0x120
+[ 6389.414667]  ? SYSC_finit_module+0xfc/0x120
+[ 6389.418424]  SyS_finit_module+0xe/0x10
+[ 6389.424673]  do_syscall_64+0x73/0x130
+[ 6389.428972]  entry_SYSCALL_64_after_hwframe+0x59/0xbe
+[ 6389.433638] RIP: 0033:0x7f289ba9a539
+[ 6389.440217] RSP: 002b:00007ffd94493178 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[ 6389.448038] RAX: ffffffffffffffda RBX: 000055682dd3d700 RCX: 00007f289ba9a539
+[ 6389.455910] RDX: 0000000000000000 RSI: 000055682da04cee RDI: 0000000000000005
+[ 6389.463534] RBP: 000055682da04cee R08: 0000000000000000 R09: 000055682dd3ce00
+[ 6389.471560] R10: 0000000000000005 R11: 0000000000000246 R12: 0000000000000000
+[ 6389.479484] R13: 000055682dd44630 R14: 0000000000060000 R15: 000055682dd3ce00
+[ 6389.540539]    prefetch64-sse: 49053.000 MB/sec
