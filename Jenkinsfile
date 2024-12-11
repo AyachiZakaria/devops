@@ -1,70 +1,32 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout GIT') {
             steps {
-                git branch: 'main', url: 'https://github.com/AyachiZakaria/devops.git'
+                echo 'Pulling...'
+                git branch: 'main',
+                    url: 'https://github.com/AyachiZakaria/devops.git'
             }
         }
-
-        stage('Build Project') {
+        stage('Testing maven') {
             steps {
-                sh './mvnw clean package'
+                sh 'mvn -version'
             }
         }
-
-        stage('Run Unit Tests') {
+        stage('Maven Clean') {
             steps {
-                sh './mvnw test'
+                sh 'mvn clean'
             }
         }
-
-        stage('SonarQube Analysis') {
+        stage('Maven Compile') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh './mvnw sonar:sonar'
-                }
+                sh 'mvn compile'
             }
         }
-
-        stage('Prepare for Distribution') {
+        stage('Maven SonarQube') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                sh 'mvn sonar:sonar -Dsonar.token=squ_fa2963c59c49aabc32cb3c5215cc92df27f3743d'
             }
-        }
-
-        stage('Upload to Nexus') {
-            steps {
-                sh '''
-                curl -u admin:admin123 --upload-file target/your-app.jar \
-                http://<NEXUS_IP>:8081/repository/maven-releases/your-app.jar
-                '''
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t your-dockerhub-username/your-app:latest .'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                sh 'docker push your-dockerhub-username/your-app:latest'
-            }
-        }
-
-        stage('Deploy with Docker Compose') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline Finished!'
         }
     }
 }
