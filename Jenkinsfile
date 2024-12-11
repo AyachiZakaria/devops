@@ -28,5 +28,21 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.token=squ_fa2963c59c49aabc32cb3c5215cc92df27f3743d'
             }
         }
+        stage('Run Tests') {
+             steps {
+                sh 'mvn test'
+             }
+        }
     }
+    post {
+            always {
+                echo 'Pipeline finished.'
+            }
+            success {
+                echo 'Pipeline completed successfully!'
+            }
+            failure {
+                echo 'Pipeline failed!'
+            }
+        }
 }
