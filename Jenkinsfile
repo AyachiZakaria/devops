@@ -69,7 +69,7 @@ pipeline {
         stage('Push DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKER_REGISTRY_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_REGISTRY_CREDENTIALS) {
                         sh 'docker push $DOCKER_IMAGE'
                     }
                 }
