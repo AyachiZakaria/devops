@@ -109,7 +109,7 @@ class EventServicesImplTest {
         logistics.setQuantite(2);
         event.setLogistics(Set.of(logistics));
 
-        when(eventRepository.findByDateDebutBetween(eq(startDate), eq(endDate)))
+        when(eventRepository.findByDateDebutBetween((startDate), eq(endDate)))
                 .thenReturn(List.of(event));
 
         List<Logistics> logisticsList = eventServices.getLogisticsDates(startDate, endDate);
@@ -131,7 +131,7 @@ class EventServicesImplTest {
         event.setLogistics(Set.of(logistics));
 
         when(eventRepository.findByParticipants_NomAndParticipants_PrenomAndParticipants_Tache(
-                eq("Tounsi"), eq("Ahmed"), eq(Tache.ORGANISATEUR)))
+                ("Tounsi"), ("Ahmed"), (Tache.ORGANISATEUR)))
                 .thenReturn(List.of(event));
 
         eventServices.calculCout();

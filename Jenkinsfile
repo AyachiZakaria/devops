@@ -5,7 +5,7 @@ pipeline {
             DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
         }
     stages {
-        stage('Checkout GIT') {
+        stage('Checkout GIT Repository') {
             steps {
                 echo 'Pulling...'
                 git branch: 'main',
@@ -27,11 +27,21 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage('Maven SonarQube') {
+        stage('JUnit/Mockito') {
+                     steps {
+                        sh 'mvn test'
+                     }
+                }
+        stage('SonarQube') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.token=squ_fa2963c59c49aabc32cb3c5215cc92df27f3743d'
             }
         }
+        stage('Deploy to Nexus') {
+                steps {
+                    sh 'mvn clean deploy'
+                }
+            }
         stage('Build Docker Image') {
                     steps {
                         script {
@@ -39,7 +49,6 @@ pipeline {
                         }
                     }
                 }
-
         stage('Push DockerHub') {
                 steps {
                         script {
@@ -49,16 +58,6 @@ pipeline {
                         }
                     }
                 }
-        stage('Run Tests') {
-             steps {
-                sh 'mvn test'
-             }
-        }
-        stage('Nexus') {
-            steps {
-                sh 'mvn clean deploy'
-            }
-        }
     }
     post {
             always {
