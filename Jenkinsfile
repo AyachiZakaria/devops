@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-            DOCKER_IMAGE = "ayachizakaria/timesheet-devops:1.0.0"
+            DOCKER_IMAGE = "ayachizakaria/events_project:1.0.0"
             DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
         }
     stages {
