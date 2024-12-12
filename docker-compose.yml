@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   backend:
-    image: ayachizakaria/events_project:1.0
+    image: ayachizakaria/events_project:1.0.0
     restart: on-failure
     stdin_open: true
     tty: true
@@ -13,7 +13,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ""
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "true" # Corrected to string
+      SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5Dialect
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_DATABASE: devops
       MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # Corrected to string
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - db_data:/var/lib/mysql
 
