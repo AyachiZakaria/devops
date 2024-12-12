@@ -4,6 +4,9 @@ pipeline {
     environment {
         DOCKER_IMAGE = "ayachizakaria/events_project:1.0.0"
         DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
+        registry = "ayachizakaria/events_project:1.0.0"
+        registryCredential = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
+        dockerImage = ''
     }
 
 
@@ -58,23 +61,22 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
-                }
-            }
-        }
-
-        stage('Push DockerHub') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_REGISTRY_CREDENTIALS) {
-                        sh 'docker push $DOCKER_IMAGE'
+         stage('Building our image') {
+                    steps {
+                        script {
+                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                        }
                     }
                 }
-            }
-        }
+                stage('Deploy our image') {
+                    steps {
+                        script {
+                            docker.withRegistry( '', registryCredential ) {
+                                dockerImage.push()
+                            }
+                        }
+                    }
+                }
 
         stage('Deploy Using Docker Compose') {
             steps {
