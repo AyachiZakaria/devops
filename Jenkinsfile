@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "ayachizakaria/events_project:1.0.0"
-        DOCKER_CREDENTIALS_ID = 'DOCKER_REGISTRY_CREDENTIALS' // Jenkins Credential ID
+        DOCKER_CREDENTIALS_ID = 'DOCKER_REGISTRY_CREDENTIALS'
         SONAR_TOKEN = 'squ_fa2963c59c49aabc32cb3c5215cc92df27f3743d'
     }
 
