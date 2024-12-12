@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: amirabm/gestion-station-ski-1.0
+    image: ayachizakaria/events_project-1.0
     restart: on-failure
     stdin_open: true
     tty: true
