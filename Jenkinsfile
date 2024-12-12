@@ -6,6 +6,7 @@ pipeline {
         DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
     }
 
+
     stages {
         stage('Checkout GIT Repository') {
             steps {
@@ -60,7 +61,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
+                    sh 'docker build -t ${env.DOCKER_IMAGE} .'
                 }
             }
         }
