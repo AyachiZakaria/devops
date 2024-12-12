@@ -10,7 +10,6 @@ import tn.esprit.eventsproject.entities.Logistics;
 import tn.esprit.eventsproject.entities.Participant;
 import tn.esprit.eventsproject.entities.Tache;
 import tn.esprit.eventsproject.repositories.EventRepository;
-import tn.esprit.eventsproject.repositories.LogisticsRepository;
 import tn.esprit.eventsproject.repositories.ParticipantRepository;
 import tn.esprit.eventsproject.services.EventServicesImpl;
 
@@ -19,7 +18,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 class EventServicesImplTest {
@@ -32,9 +30,6 @@ class EventServicesImplTest {
 
     @Mock
     private ParticipantRepository participantRepository;
-
-    @Mock
-    private LogisticsRepository logisticsRepository;
 
     @BeforeEach
     void setUp() {
@@ -76,26 +71,6 @@ class EventServicesImplTest {
         verify(eventRepository, times(1)).save(event);
     }
 
-    /*@Test
-    void testAddAffectLog() {
-        Event event = new Event();
-        event.setLogistics(new HashSet<>());
-        event.setDescription("Test Event");
-
-        Logistics logistics = new Logistics();
-        logistics.setIdLog(200);
-        logistics.setReserve(true);
-
-        when(eventRepository.findByDescription("Test Event")).thenReturn(event);
-        when(logisticsRepository.save(any(Logistics.class))).thenReturn(logistics);
-
-        Logistics savedLogistics = eventServices.addAffectLog(logistics, "Test Event");
-
-        assertNotNull(savedLogistics);
-        assertTrue(event.getLogistics().contains(logistics));
-        verify(eventRepository, times(1)).save(event);
-        verify(logisticsRepository, times(1)).save(logistics);
-    }*/
 
     @Test
     void testGetLogisticsDates() {
@@ -109,7 +84,7 @@ class EventServicesImplTest {
         logistics.setQuantite(2);
         event.setLogistics(Set.of(logistics));
 
-        when(eventRepository.findByDateDebutBetween((startDate), eq(endDate)))
+        when(eventRepository.findByDateDebutBetween((startDate), (endDate)))
                 .thenReturn(List.of(event));
 
         List<Logistics> logisticsList = eventServices.getLogisticsDates(startDate, endDate);
@@ -119,6 +94,7 @@ class EventServicesImplTest {
         assertEquals(logistics, logisticsList.get(0));
         verify(eventRepository, times(1)).findByDateDebutBetween(startDate, endDate);
     }
+
 
     @Test
     void testCalculCout() {
