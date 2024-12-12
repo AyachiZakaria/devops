@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('Code Analysis with SonarQube') {
+        stage('SonarQube') {
             steps {
                 echo 'Running SonarQube analysis...'
                 sh "mvn sonar:sonar -Dsonar.token=${SONAR_TOKEN}"
@@ -49,7 +49,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Nexus') {
+        stage('Nexus') {
             steps {
                 echo 'Deploying artifacts to Nexus repository...'
                 sh 'mvn deploy -DskipTests'
@@ -65,7 +65,7 @@ pipeline {
             }
         }
 
-        stage('Push to DockerHub') {
+        stage('DockerHub') {
             steps {
                 script {
                     echo 'Pushing Docker image to DockerHub...'
@@ -80,7 +80,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Using Docker Compose') {
+        stage('Docker Compose') {
             steps {
                 echo 'Deploying application using Docker Compose...'
                 sh '''

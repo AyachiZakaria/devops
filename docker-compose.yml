@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   backend:
-    image: ayachizakaria/events_project-1.0
+    image: ayachizakaria/events_project
     restart: on-failure
     stdin_open: true
     tty: true
