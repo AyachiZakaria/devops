@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+            DOCKER_IMAGE = "ayachizakaria/timesheet-devops:1.0.0"
+            DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
+        }
     stages {
         stage('Checkout GIT') {
             steps {
@@ -28,6 +32,23 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.token=squ_fa2963c59c49aabc32cb3c5215cc92df27f3743d'
             }
         }
+        stage('Build Docker Image') {
+                    steps {
+                        script {
+                            sh 'docker build -t $DOCKER_IMAGE .'
+                        }
+                    }
+                }
+
+        stage('Push Docker Image to DockerHub') {
+                steps {
+                        script {
+                            docker.withRegistry('https://registry.hub.docker.com', DOCKER_REGISTRY_CREDENTIALS) {
+                                sh 'docker push $DOCKER_IMAGE'
+                            }
+                        }
+                    }
+                }
         stage('Run Tests') {
              steps {
                 sh 'mvn test'

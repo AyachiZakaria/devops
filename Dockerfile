@@ -1,8 +1,4 @@
-# Base image
-FROM openjdk:17-jre-slim
-
-# Add Spring Boot JAR file to the container
-COPY target/your-app.jar /app.jar
-
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+FROM openjdk:17-jdk-alpine
+EXPOSE 8082
+ADD target/events_project-1.0.jar events_project-1.0.jar
+ENTRYPOINT ["java", "-jar", "/events_project-1.0.jar"]
