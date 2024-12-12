@@ -61,7 +61,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t ${env.DOCKER_IMAGE} .'
+                    sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
@@ -87,15 +87,15 @@ pipeline {
 
     post {
         always {
-            echo 'Pipeline finished.'
+            echo 'finished.'
         }
 
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'success!'
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo 'failed!'
         }
     }
 }
