@@ -4,9 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE = "ayachizakaria/events_project:1.0.0"
         DOCKER_REGISTRY_CREDENTIALS = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
-        registry = "ayachizakaria/events_project:1.0.0"
-        registryCredential = 'dckr_pat_JzVnKoPEgRjo2W4J7jQaSj3Kyz8'
-        dockerImage = ''
     }
 
 
@@ -60,22 +57,7 @@ pipeline {
                 sh 'mvn clean deploy'
             }
         }
-        stage('Building our image') {
-        steps{
-        script {
-        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-        }
-        }
-        stage('Deploy our image') {
-        steps{
-        script {
-        docker.withRegistry( '', registryCredential ) {
-        dockerImage.push()
-        }
-        }
-        }
-        }
+
         stage('Build Docker Image') {
             steps {
                 script {
